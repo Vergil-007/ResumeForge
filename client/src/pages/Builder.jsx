@@ -30,6 +30,8 @@ const templatesMap = {
   template12: TemplateTwelve
 };
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const initialData = {
   personalInfo: {
     fullName: '',
@@ -70,7 +72,7 @@ const Builder = () => {
 
   const fetchResume = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/resumes/${id}`);
+      const res = await axios.get(`${API_URL}/api/resumes/${id}`);
       setTitle(res.data.title);
       setTemplateId(res.data.template_id);
       setResumeData(res.data.content_json);
@@ -87,14 +89,14 @@ const Builder = () => {
     setSaving(true);
     try {
       if (isNew) {
-        const res = await axios.post('http://localhost:5000/api/resumes', {
+        const res = await axios.post(`${API_URL}/api/resumes`, {
           title,
           template_id: templateId,
           content_json: resumeData
         });
         navigate(`/builder/${res.data.id}`);
       } else {
-        await axios.put(`http://localhost:5000/api/resumes/${id}`, {
+        await axios.put(`${API_URL}/api/resumes/${id}`, {
           title,
           template_id: templateId,
           content_json: resumeData

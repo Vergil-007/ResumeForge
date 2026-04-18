@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const Dashboard = () => {
   const [resumes, setResumes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ const Dashboard = () => {
 
   const fetchResumes = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/resumes');
+      const res = await axios.get(`${API_URL}/api/resumes`);
       setResumes(res.data);
     } catch (err) {
       console.error('Error fetching resumes', err);
@@ -27,7 +29,7 @@ const Dashboard = () => {
   const deleteResume = async (id) => {
     if (window.confirm('Are you sure you want to delete this resume?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/resumes/${id}`);
+        await axios.delete(`${API_URL}/api/resumes/${id}`);
         setResumes(resumes.filter(r => r.id !== id));
       } catch (err) {
         console.error('Error deleting resume', err);
