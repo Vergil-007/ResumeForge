@@ -7,16 +7,11 @@ async function init() {
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      port: process.env.DB_PORT
+      port: process.env.DB_PORT,
+      ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined
     });
 
     console.log('Connected to MySQL server.');
-
-    console.log(`Dropping database ${process.env.DB_NAME} to ensure a clean slate...`);
-    await connection.query(`DROP DATABASE IF EXISTS \`${process.env.DB_NAME}\`;`);
-    
-    await connection.query(`CREATE DATABASE \`${process.env.DB_NAME}\`;`);
-    console.log(`Database ${process.env.DB_NAME} created.`);
 
     await connection.query(`USE \`${process.env.DB_NAME}\`;`);
 
