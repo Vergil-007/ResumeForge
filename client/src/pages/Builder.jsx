@@ -65,6 +65,7 @@ const Builder = () => {
     if (!isNew) {
       fetchResume();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const fetchResume = async () => {

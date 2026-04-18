@@ -4,7 +4,7 @@ const TemplateEleven = ({ data }) => {
   const { personalInfo, experience, education, projects, skills } = data;
 
   return (
-    <div style={{ fontFamily: 'Impact, sans-serif', padding: '30px', color: '#000', fontFamily: 'Arial, sans-serif' }}>
+    <div style={{ padding: '30px', color: '#000', fontFamily: 'Arial, sans-serif' }}>
       
       {/* Heavy Header */}
       <div style={{ borderBottom: '8px solid #000', paddingBottom: '10px', marginBottom: '30px' }}>
